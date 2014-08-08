@@ -11,8 +11,8 @@ $(BIN):$(OBJS)
 	rm -f *.o
 	rm -rf $(INCLUDE)
 	mkdir $(INCLUDE)
-	cp *.h $(INCLUDE)/
-%.o:%.cpp
+	cp src/*.h $(INCLUDE)/
+%.o:src/%.cpp
 	$(CC) $(CFLAGS) -c $< -o $@ $(STARD)
 install:
 	sudo cp $(BIN) /usr/lib/
