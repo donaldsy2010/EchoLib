@@ -1,8 +1,9 @@
-.PHONY:clean
+.PHONY:clean install
 CC=g++
 CFLAGS=-Wall -g
 BIN=libecho.a
 INCLUDE=echo
+SRC=src
 OBJS=Socket.o Rio.o TcpConnection.o PollPoller.o InetAddress.o TcpServer.o Thread.o Condition.o ThreadPool.o Exception.o Timer.o TimerThread.o
 STARD=-std=c++0x -rdynamic
 $(BIN):$(OBJS)
@@ -12,7 +13,7 @@ $(BIN):$(OBJS)
 	rm -rf $(INCLUDE)
 	mkdir $(INCLUDE)
 	cp src/*.h $(INCLUDE)/
-%.o:src/%.cpp
+%.o:$(SRC)/%.cpp
 	$(CC) $(CFLAGS) -c $< -o $@ $(STARD)
 install:
 	sudo cp $(BIN) /usr/lib/
