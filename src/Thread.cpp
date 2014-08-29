@@ -1,4 +1,5 @@
 #include "Thread.h"
+#include <assert.h>
 
 Thread::Thread()
     :tid_(0),
@@ -28,6 +29,7 @@ void Thread::setCallback(const ThreadFunc &cb)
 void *Thread::threadFunc(void *arg)
 {
     Thread *pt = static_cast<Thread *>(arg);
+    assert(pt->callback_);
     pt->callback_();  //调用线程逻辑
 
     return NULL;
@@ -36,7 +38,6 @@ void *Thread::threadFunc(void *arg)
 
 void Thread::start()
 {
-    //void *(*)(void *)
     pthread_create(&tid_, NULL, threadFunc, this);
 }
 
